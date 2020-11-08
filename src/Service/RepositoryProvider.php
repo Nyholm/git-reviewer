@@ -33,7 +33,9 @@ class RepositoryProvider
             $process->run();
 
             if (!preg_match('|origin\tgit@github.com:([a-zA-z0-9_-]+)/([a-zA-z0-9_-]+)\.git|s', $process->getOutput(), $matches)) {
-                return null;
+                if (!preg_match('|origin\thttps://github.com/([a-zA-z0-9_-]+)/([a-zA-z0-9_-]+) |s', $process->getOutput(), $matches)) {
+                    return null;
+                }
             }
 
             return new Repository($matches[1], $matches[2], $workspace);
