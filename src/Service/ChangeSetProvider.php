@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace Nyholm\GitReviewer\Service;
-
 
 use Github\Client;
 use Nyholm\GitReviewer\Model\Repository;
@@ -17,14 +15,10 @@ class ChangeSetProvider
      */
     private $github;
 
-    /**
-     * @param Client $github
-     */
     public function __construct(Client $github)
     {
         $this->github = $github;
     }
-
 
     public function getChangedFiles(Repository $repository, int $number, array $ignoredPaths): array
     {
@@ -87,7 +81,6 @@ class ChangeSetProvider
         if (in_array($path, $ignoredFiles, true)) {
             return false;
         }
-
 
         foreach ($ignoredPatterns as $pattern) {
             if (preg_match($pattern, $path)) {

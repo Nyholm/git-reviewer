@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-
 namespace Nyholm\GitReviewer\Service;
-
 
 use Nyholm\GitReviewer\Model\Repository;
 use Symfony\Component\Process\Process;
@@ -23,7 +21,7 @@ class ContributorProvider
 
         $authors = array_values($authors);
         usort($authors, function ($a, $b) {
-           return $b['contributions'] - $a['contributions'];
+            return $b['contributions'] - $a['contributions'];
         });
 
         return $authors;
@@ -54,7 +52,7 @@ class ContributorProvider
                     'contributions' => 1,
                 ];
             } else {
-                $authors[$matches[2][$i]]['contributions']++;
+                ++$authors[$matches[2][$i]]['contributions'];
             }
         }
     }

@@ -1,7 +1,7 @@
 # Find reviewers
 
 ```
-./git-reviewer.php --env=dev find 106 /Users/tobias/Workspace/PHPStorm/carsonbot --ignore-path "config/*" --ignore-path .env  --pretty-print
+./git-reviewer.php find 106 /Users/tobias/Workspace/PHPStorm/carsonbot --ignore-path "config/*" --ignore-path .env  --pretty-print
 ```
 
 ```json
