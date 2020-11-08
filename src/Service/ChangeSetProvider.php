@@ -53,9 +53,12 @@ class ChangeSetProvider
         $this->logger->debug($out);
         $this->logger->debug($err);
         // TODO check for errors
+        if (!$process->isSuccessful()) {
+            throw new \RuntimeException('Could not get diff');
+        }
 
         $filesChanged = explode(PHP_EOL, $out);
-        $this->logger->debug('Total number of files changed: '.count($filesChanged) - 1);
+        $this->logger->debug('Total number of files changed: '.(count($filesChanged)-1));
 
         // Prepare ignored paths
         $ignoredFiles = [];
