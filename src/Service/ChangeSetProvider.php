@@ -22,7 +22,7 @@ class ChangeSetProvider
     public function getChangedFiles(Repository $repository, int $number, array $ignoredPaths): array
     {
         $pr = $this->pullRequestFetcher->get($repository, $number);
-        $headRepoUrl = $pr['head']['repo']['ssh_url'];
+        $headRepoUrl = $pr['head']['repo']['svn_url'];
         $headRepoName = $pr['head']['repo']['owner']['login'];
         $headCommit = $pr['head']['sha'];
         $baseCommit = $pr['base']['sha'];
