@@ -4,25 +4,21 @@ declare(strict_types=1);
 
 namespace Nyholm\GitReviewer\Service;
 
-use Github\Client;
 use Nyholm\GitReviewer\Model\Repository;
 use Symfony\Component\Process\Process;
 
 class ChangeSetProvider
 {
-    /**
-     * @var Client
-     */
-    private $github;
+    private $pullRequestFetcher;
 
-    public function __construct(Client $github)
+    public function __construct(PullRequestFetcher $pullRequestFetcher)
     {
-        $this->github = $github;
+        $this->pullRequestFetcher = $pullRequestFetcher;
     }
 
     public function getChangedFiles(Repository $repository, int $number, array $ignoredPaths): array
     {
-        $pr = $this->github->pullRequest()->show($repository->getUser(), $repository->getName(), $number);
+        $pr = $this->pullRequestFetcher->get($repository, $number);
         $headRepoUrl = $pr['head']['repo']['ssh_url'];
         $headRepoName = $pr['head']['repo']['owner']['login'];
         $headCommit = $pr['head']['sha'];

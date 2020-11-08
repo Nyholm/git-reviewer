@@ -65,7 +65,6 @@ class FindCommand extends Command
                 $contributors[$key]['username'] = $this->usernameProvider->findUsername($c['email'], $c['name']);
             }
         }
-        $x = 2;
 
         if ($input->getOption('pretty-print')) {
             $output->writeln(json_encode($contributors, JSON_PRETTY_PRINT));

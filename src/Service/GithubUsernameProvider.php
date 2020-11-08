@@ -24,6 +24,15 @@ class GithubUsernameProvider
 
     public function findUsername(string $email, string $name): ?string
     {
+        try {
+            return $this->fetchFromCache($email, $name);
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    private function fetchFromCache(string $email, string $name): ?string
+    {
         $key = 'user_'.sha1($email.$name);
 
         return $this->cache->get($key, function (ItemInterface $item) use ($email, $name) {
