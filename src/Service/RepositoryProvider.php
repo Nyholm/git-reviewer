@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-
 namespace Nyholm\GitReviewer\Service;
 
 use Nyholm\GitReviewer\Model\Repository;
 use Symfony\Component\Process\Process;
 
 /**
- * Find repository from git root
+ * Find repository from git root.
+ *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
 class RepositoryProvider

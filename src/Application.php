@@ -25,7 +25,6 @@ class Application extends BaseApplication
 
         $inputDefinition = $this->getDefinition();
         $inputDefinition->addOption(new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', 'prod'));
-
     }
 
     /**

@@ -13,7 +13,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
 
 class FindCommand extends Command
 {
@@ -22,7 +21,6 @@ class FindCommand extends Command
     private $changeSetProvider;
     private $contributorProvider;
     private $usernameProvider;
-
 
     public function __construct(RepositoryProvider $repositoryProvider, ChangeSetProvider $changeSetProvider, ContributorProvider $contributorProvider, GithubUsernameProvider $usernameProvider)
     {
@@ -55,7 +53,7 @@ class FindCommand extends Command
 
         // run git blame on paths in workspace
         $after = $input->getOption('after');
-        if ($after === null) {
+        if (null === $after) {
             $after = '2010-01-01';
         }
 
@@ -67,7 +65,7 @@ class FindCommand extends Command
                 $contributors[$key]['username'] = $this->usernameProvider->findUsername($c['email'], $c['name']);
             }
         }
-        $x =2;
+        $x = 2;
 
         if ($input->getOption('pretty-print')) {
             $output->writeln(json_encode($contributors, JSON_PRETTY_PRINT));

@@ -32,5 +32,8 @@
         "psr-4": {
             "Tests\\Nyholm\\GitReviewer\\": "tests/"
         }
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^5.1"
     }
 }

@@ -14,7 +14,6 @@ use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\PhpDumper;
-use Symfony\Component\DependencyInjection\Loader\ClosureLoader;
 use Symfony\Component\DependencyInjection\Loader\DirectoryLoader;
 use Symfony\Component\DependencyInjection\Loader\GlobFileLoader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -35,7 +34,7 @@ class Kernel
 
     public function __construct(string $env)
     {
-        $this->debug = $env !== 'prod';
+        $this->debug = 'prod' !== $env;
         $this->env = $env;
     }
 
@@ -117,6 +116,4 @@ class Kernel
     {
         return $this->env;
     }
-
-
 }
