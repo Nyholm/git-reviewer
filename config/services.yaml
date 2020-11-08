@@ -1,0 +1,15 @@
+parameters:
+
+
+services:
+  # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+          string $cacheDir: '%kernel.cache_dir%'
+
+
+    Nyholm\GitReviewer\:
+      resource: '../src/*'
+      exclude: '../src/{Kernel.php,Application.php}'
