@@ -29,24 +29,33 @@ class ChangeSetProvider
 
         $process = new Process(['git', 'remote', 'add', $headRepoName, $headRepoUrl], $repository->getWorkspace());
         $process->run();
+        $this->logger->debug('Git remote add');
         $out = $process->getOutput();
         $err = $process->getErrorOutput();
+        $this->logger->debug($out);
+        $this->logger->debug($err);
         // TODO check for errors
 
         $process = new Process(['git', 'fetch', $headRepoName], $repository->getWorkspace());
         $process->run();
+        $this->logger->debug('Git fetch');
         $out = $process->getOutput();
         $err = $process->getErrorOutput();
+        $this->logger->debug($out);
+        $this->logger->debug($err);
         // TODO check for errors
 
         $process = new Process(['git', 'diff', sprintf('%s...%s', $baseCommit, $headCommit), '--name-only'], $repository->getWorkspace());
         $process->run();
+        $this->logger->debug('Git diff');
         $out = $process->getOutput();
         $err = $process->getErrorOutput();
+        $this->logger->debug($out);
+        $this->logger->debug($err);
         // TODO check for errors
 
         $filesChanged = explode(PHP_EOL, $out);
-        $this->logger->debug('Total number of files changed: '.count($filesChanged));
+        $this->logger->debug('Total number of files changed: '.count($filesChanged) - 1);
 
         // Prepare ignored paths
         $ignoredFiles = [];
