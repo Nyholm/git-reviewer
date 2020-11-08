@@ -1,0 +1,4 @@
+services:
+    Psr\Log\LoggerInterface:
+        class: Bref\Logger\StderrLogger
+        arguments: ['debug']

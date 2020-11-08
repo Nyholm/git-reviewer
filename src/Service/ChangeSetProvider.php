@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace Nyholm\GitReviewer\Service;
 
 use Nyholm\GitReviewer\Model\Repository;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Process\Process;
 
 class ChangeSetProvider
 {
     private $pullRequestFetcher;
+    private $logger;
 
-    public function __construct(PullRequestFetcher $pullRequestFetcher)
+    public function __construct(PullRequestFetcher $pullRequestFetcher, LoggerInterface $logger)
     {
         $this->pullRequestFetcher = $pullRequestFetcher;
+        $this->logger = $logger;
     }
 
     public function getChangedFiles(Repository $repository, int $number, array $ignoredPaths): array
@@ -23,7 +26,7 @@ class ChangeSetProvider
         $headRepoName = $pr['head']['repo']['owner']['login'];
         $headCommit = $pr['head']['sha'];
         $baseCommit = $pr['base']['sha'];
-        $x = 2;
+
         $process = new Process(['git', 'remote', 'add', $headRepoName, $headRepoUrl], $repository->getWorkspace());
         $process->run();
         $out = $process->getOutput();
@@ -43,7 +46,7 @@ class ChangeSetProvider
         // TODO check for errors
 
         $filesChanged = explode(PHP_EOL, $out);
-        $x = 2;
+        $this->logger->debug('Total number of files changed: '.count($filesChanged));
 
         // Prepare ignored paths
         $ignoredFiles = [];
@@ -64,6 +67,8 @@ class ChangeSetProvider
                 $output[] = $file;
             }
         }
+
+        $this->logger->debug('Files changes after applying filter: '.count($output));
 
         return $output;
     }

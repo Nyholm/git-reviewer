@@ -8,6 +8,7 @@ use Nyholm\GitReviewer\Service\ChangeSetProvider;
 use Nyholm\GitReviewer\Service\ContributorProvider;
 use Nyholm\GitReviewer\Service\GithubUsernameProvider;
 use Nyholm\GitReviewer\Service\RepositoryProvider;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,14 +22,16 @@ class FindCommand extends Command
     private $changeSetProvider;
     private $contributorProvider;
     private $usernameProvider;
+    private $logger;
 
-    public function __construct(RepositoryProvider $repositoryProvider, ChangeSetProvider $changeSetProvider, ContributorProvider $contributorProvider, GithubUsernameProvider $usernameProvider)
+    public function __construct(RepositoryProvider $repositoryProvider, ChangeSetProvider $changeSetProvider, ContributorProvider $contributorProvider, GithubUsernameProvider $usernameProvider, LoggerInterface $logger)
     {
         parent::__construct();
         $this->repositoryProvider = $repositoryProvider;
         $this->changeSetProvider = $changeSetProvider;
         $this->contributorProvider = $contributorProvider;
         $this->usernameProvider = $usernameProvider;
+        $this->logger = $logger;
     }
 
     protected function configure()
@@ -58,6 +61,7 @@ class FindCommand extends Command
         }
 
         $contributors = $this->contributorProvider->getContributors($repository, $files, new \DateTimeImmutable($after));
+        $this->logger->info(sprintf('We found %d contributors', count($contributors)));
 
         // get their usernames
         if (!$input->getOption('no-username')) {
