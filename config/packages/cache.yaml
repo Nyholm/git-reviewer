@@ -6,5 +6,5 @@ services:
     arguments:
       - 'git-reviewer'
       - 0
-      - '%kernel.cache_dir%/cache'
+      - '%kernel.project_dir%/var/storage'
 
