@@ -1,13 +1,22 @@
-# Preload optimizer
+# Find reviewers
 
-Make sure your classes are perfectly configured for preloading.
+```
+./git-reviewer.php --env=dev find 106 /Users/tobias/Workspace/PHPStorm/carsonbot --ignore-path "config/*" --ignore-path .env  --pretty-print
+```
 
-
-
-Use class_exists on all:
-- return type
-- argument
-- new class creation
-- Foo::class
-for non-public constructor + all constructors calls to private/protected functions.
-And exclude “already known classes”
+```json
+[
+    {
+        "email": "tobias.nyholm@gmail.com",
+        "name": "Tobias Nyholm",
+        "contributions": 3,
+        "username": "Nyholm"
+    },
+    {
+        "email": "ion.bazan@gmail.com",
+        "name": "Ion Bazan",
+        "contributions": 1,
+        "username": "IonBazan"
+    }
+]
+```
