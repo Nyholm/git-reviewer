@@ -1,0 +1,17 @@
+services:
+    Github\Client:
+        factory: 'Nyholm\GitReviewer\Service\GithubFactory::create'
+        arguments: ['@Github\HttpClient\Builder', '%env(default::GITHUB_TOKEN)%']
+
+    Github\HttpClient\Builder:
+        arguments:
+            - '@github.httplug_client'
+            - '@Http\Message\RequestFactory'
+            - '@Http\Message\StreamFactory'
+
+    github.httplug_client:
+        class: Symfony\Component\HttpClient\HttplugClient
+        arguments:
+            - '@http_client'
+            - '@Psr\Http\Message\ResponseFactoryInterface'
+            - '@Psr\Http\Message\StreamFactoryInterface'

@@ -26,7 +26,15 @@ class GithubUsernameProvider
 
     public function findUsername(string $email, string $name): ?string
     {
-        $x =2;
+        $byEmail = $this->github->search()->users($email.' in:email type:users ');
+        if ($byEmail['total_count'] === 1) {
+            return $byEmail['items'][0]['login'];
+        }
+
+        $byName = $this->github->search()->users('type:users fullname:'.sprintf('"%s"', $name));
+        if ($byName['total_count'] === 1) {
+            return $byName['items'][0]['login'];
+        }
 
         return null;
     }

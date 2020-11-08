@@ -21,6 +21,11 @@ class ContributorProvider
             $this->parseAuthors($authors, $process->getOutput(), $timestamp);
         }
 
+        $authors = array_values($authors);
+        usort($authors, function ($a, $b) {
+           return $b['contributions'] - $a['contributions'];
+        });
+
         return $authors;
     }
 
@@ -46,10 +51,10 @@ class ContributorProvider
                 $authors[$matches[2][$i]] = [
                     'email' => $matches[2][$i],
                     'name' => $matches[1][$i],
-                    'count' => 1,
+                    'contributions' => 1,
                 ];
             } else {
-                $authors[$matches[2][$i]]['count']++;
+                $authors[$matches[2][$i]]['contributions']++;
             }
         }
     }

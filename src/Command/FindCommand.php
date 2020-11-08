@@ -41,19 +41,19 @@ class FindCommand extends Command
         $this->addOption('after', null, InputOption::VALUE_REQUIRED, 'Only look for contributors after a date (Y-m-d)');
         $this->addOption('ignore-path', null, InputOption::VALUE_IS_ARRAY | InputOption::VALUE_OPTIONAL, 'Ignore contributors to path matching this');
         $this->addOption('no-username', null, InputOption::VALUE_NONE, 'Dont fetch the github username');
+        $this->addOption('pretty-print', null, InputOption::VALUE_NONE, 'Human readable output');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $repository = $this->repositoryProvider->find($input->getArgument('workspace'));
 
-        // TODO find the changed files in pull request
-
+        // find the changed files in pull request
         $pullRequest = (int) $input->getArgument('pull-request');
         $ignorePats = (array) $input->getOption('ignore-path');
         $files = $this->changeSetProvider->getChangedFiles($repository, $pullRequest, $ignorePats);
 
-        // TODO run git blame on paths in workspace
+        // run git blame on paths in workspace
         $after = $input->getOption('after');
         if ($after === null) {
             $after = '2010-01-01';
@@ -61,8 +61,7 @@ class FindCommand extends Command
 
         $contributors = $this->contributorProvider->getContributors($repository, $files, new \DateTimeImmutable($after));
 
-        // TODO get their usernames
-
+        // get their usernames
         if (!$input->getOption('no-username')) {
             foreach ($contributors as $key => $c) {
                 $contributors[$key]['username'] = $this->usernameProvider->findUsername($c['email'], $c['name']);
@@ -70,7 +69,11 @@ class FindCommand extends Command
         }
         $x =2;
 
-        // TODO print
+        if ($input->getOption('pretty-print')) {
+            $output->writeln(json_encode($contributors, JSON_PRETTY_PRINT));
+        } else {
+            $output->writeln(json_encode($contributors));
+        }
 
         return 0;
     }
