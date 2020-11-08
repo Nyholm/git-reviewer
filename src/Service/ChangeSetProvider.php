@@ -29,7 +29,7 @@ class ChangeSetProvider
 
         $process = new Process(['git', 'remote', 'add', $headRepoName, $headRepoUrl], $repository->getWorkspace());
         $process->run();
-        $this->logger->debug('Git remote add');
+        $this->logger->debug($process->getCommandLine());
         $out = $process->getOutput();
         $err = $process->getErrorOutput();
         $this->logger->debug($out);
@@ -38,7 +38,7 @@ class ChangeSetProvider
 
         $process = new Process(['git', 'fetch', $headRepoName], $repository->getWorkspace());
         $process->run();
-        $this->logger->debug('Git fetch');
+        $this->logger->debug($process->getCommandLine());
         $out = $process->getOutput();
         $err = $process->getErrorOutput();
         $this->logger->debug($out);
@@ -47,7 +47,7 @@ class ChangeSetProvider
 
         $process = new Process(['git', 'diff', sprintf('%s...%s', $baseCommit, $headCommit), '--name-only'], $repository->getWorkspace());
         $process->run();
-        $this->logger->debug('Git diff');
+        $this->logger->debug($process->getCommandLine());
         $out = $process->getOutput();
         $err = $process->getErrorOutput();
         $this->logger->debug($out);
