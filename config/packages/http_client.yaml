@@ -1,0 +1,6 @@
+services:
+  http_client:
+    class: Symfony\Contracts\HttpClient\HttpClientInterface
+    factory: 'Symfony\Component\HttpClient\HttpClient::create'
+
+  Symfony\Contracts\HttpClient\HttpClientInterface: '@http_client'

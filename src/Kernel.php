@@ -110,11 +110,7 @@ class Kernel
 
     public function getCacheDir()
     {
-        if ($this->debug) {
-            return $this->getProjectDir().'/var/cache/'.$this->env;
-        }
-
-        return sys_get_temp_dir().'/git-reviewer/cache/'.$this->env;
+        return $this->getProjectDir().'/var/cache/'.$this->env;
     }
 
     public function getEnvironment(): string

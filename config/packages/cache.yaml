@@ -1,0 +1,10 @@
+services:
+  Symfony\Contracts\Cache\CacheInterface: '@cache.filesystem'
+
+  cache.filesystem:
+    class: Symfony\Component\Cache\Adapter\FilesystemAdapter
+    arguments:
+      - 'git-reviewer'
+      - 0
+      - '%kernel.cache_dir%'
+
