@@ -76,7 +76,7 @@ $ ./git-reviewer.php find 123 /path/to/local/repository
 
 Options:
 
-| Name         | Example value    | Description  |
+| Name         | Example           | Description  |
 |--------------|-------------------|--------------|
 | after        | 2020-01-01        | Only look at contributions after a specific date.
 | ignore-path  | .env <br> "config/*"<br>"src/**/Tests"  | Exclude paths and files when searching for contributors. <br>An astrix matches everything but "/" and double astrix <br>matches everything.
