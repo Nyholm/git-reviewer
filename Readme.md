@@ -36,8 +36,6 @@ description of each command name and their additional arguments and options.
 
 Clears the application's cache. It does **not** clear the `var/storage`.
 
-Example:
-
 ```
 $ ./git-reviewer.php cache:clear
 ```
@@ -45,8 +43,6 @@ $ ./git-reviewer.php cache:clear
 #### pull-request:base
 
 Finds the branch that the pull request target.
-
-Example:
 
 ```
 $ ./git-reviewer.php pull-request:base 123 /path/to/local/repository
@@ -57,8 +53,6 @@ master
 #### find
 
 Get a list of possible reviewers.
-
-Example:
 
 ```
 $ ./git-reviewer.php find 123 /path/to/local/repository
