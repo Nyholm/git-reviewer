@@ -58,7 +58,7 @@ class ChangeSetProvider
         }
 
         $filesChanged = explode(PHP_EOL, $out);
-        $this->logger->debug('Total number of files changed: '.(count($filesChanged)-1));
+        $this->logger->debug('Total number of files changed: '.(count($filesChanged) - 1));
 
         // Prepare ignored paths
         $ignoredFiles = [];
