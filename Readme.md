@@ -10,9 +10,7 @@ It is using a naive algorithm which:
 
 ```
 $ ./git-reviewer.php find 106 /path/to/local/repository --pretty-print
-```
 
-```json
 [
     {
         "email": "tobias.nyholm@gmail.com",
@@ -34,7 +32,7 @@ $ ./git-reviewer.php find 106 /path/to/local/repository --pretty-print
 The first argument to `./git-reviewer.php` is the "command name". Here is a short
 description of each command name and their additional arguments and options.
 
-### cache:clear
+#### cache:clear
 
 Clears the application's cache. It does **not** clear the `var/storage`.
 
@@ -44,7 +42,7 @@ Example:
 $ ./git-reviewer.php cache:clear
 ```
 
-### pull-request:base
+#### pull-request:base
 
 Finds the branch that the pull request target.
 
@@ -56,7 +54,7 @@ $ ./git-reviewer.php pull-request:base 123 /path/to/local/repository
 master
 ```
 
-### find
+#### find
 
 Get a list of possible reviewers.
 
