@@ -76,12 +76,12 @@ $ ./git-reviewer.php find 123 /path/to/local/repository
 
 Options:
 
-| Name         | Example     | Description  |
-|--------------|-------------|--------------|
-| after        | 2020-01-01  | Only look at contributions after a specific date.
-| ignore-path  | .env <br> "config/*"<br>src/**/Tests  | Exclude paths and files when searching for contributors. An astrix matches everything but "/" and double astrix matches everything.
-| no-username  |             | Don't search for the users' username. You will only get name and email.
-| pretty-print |             | Make the output more easy to read for humans.
+| Name         | Example value    | Description  |
+|--------------|-------------------|--------------|
+| after        | 2020-01-01        | Only look at contributions after a specific date.
+| ignore-path  | .env <br> "config/*"<br>"src/**/Tests"  | Exclude paths and files when searching for contributors. An astrix matches everything but "/" and double astrix matches everything.
+| no-username  |                   | Don't search for the users' username. You will only get name and email.
+| pretty-print |                   | Make the output more easy to read for humans.
 
 ## Calls to Github API
 
