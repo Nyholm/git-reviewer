@@ -79,7 +79,7 @@ Options:
 | Name         | Example value    | Description  |
 |--------------|-------------------|--------------|
 | after        | 2020-01-01        | Only look at contributions after a specific date.
-| ignore-path  | .env <br> "config/*"<br>"src/**/Tests"  | Exclude paths and files when searching for contributors. An astrix matches everything but "/" and double astrix matches everything.
+| ignore-path  | .env <br> "config/*"<br>"src/**/Tests"  | Exclude paths and files when searching for contributors. <br>An astrix matches everything but "/" and double astrix <br>matches everything.
 | no-username  |                   | Don't search for the users' username. You will only get name and email.
 | pretty-print |                   | Make the output more easy to read for humans.
 
