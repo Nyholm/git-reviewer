@@ -77,6 +77,11 @@ Options:
 | no-username  |                   | Don't search for the users' username. You will only get name and email.
 | pretty-print |                   | Make the output more easy to read for humans.
 
+
+```
+$ ./git-reviewer.php find 123 /path/to/local/repository --ignore-path "config/*" --ignore-path .env --after 2020-01-01 --no-username --pretty-print
+```
+
 ## Calls to Github API
 
 Github allows some anonymous calls, but it is a good idea to specify an environment
