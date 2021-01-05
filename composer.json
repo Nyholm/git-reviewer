@@ -1,7 +1,7 @@
 {
     "name": "nyholm/git-reviewer",
     "description": "Find a good reviewer to your github pull request",
-    "type": "library",
+    "type": "project",
     "license": "MIT",
     "authors": [
         {
