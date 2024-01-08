@@ -73,7 +73,7 @@ class Kernel
 
             $container->compile();
 
-            //dump the container
+            // dump the container
             file_put_contents(
                 $containerDumpFile,
                 (new PhpDumper($container))->dump(['class' => 'CachedContainer'])

@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.18.2@19aa905f7c3c7350569999a93c40ae91ae4e1626">
+<files psalm-version="5.18.0@b113f3ed0259fd6e212d87c3df80eec95a6abf19">
   <file src="src/Kernel.php">
-    <InvalidPropertyAssignmentValue occurrences="1">
-      <code>new \CachedContainer()</code>
-    </InvalidPropertyAssignmentValue>
+    <UndefinedClass>
+      <code>\CachedContainer</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/Service/PullRequestFetcher.php">
+    <InvalidReturnStatement>
+      <code><![CDATA[$this->cache->get($key, function (ItemInterface $item) use ($repository, $number) {
+            $pr = $this->github->pullRequest()->show($repository->getUser(), $repository->getName(), $number);
+            $item->set(300);
+
+            return $pr;
+        })]]></code>
+    </InvalidReturnStatement>
+    <InvalidReturnType>
+      <code>array</code>
+    </InvalidReturnType>
   </file>
 </files>
