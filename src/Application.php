@@ -32,7 +32,8 @@ class Application extends BaseApplication
      *
      * @return int 0 if everything went fine, or an error code
      */
-    public function doRun(InputInterface $input, OutputInterface $output)
+    #[\Override]
+    public function doRun(InputInterface $input, OutputInterface $output): int
     {
         $this->registerCommands();
 

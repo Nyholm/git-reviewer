@@ -6,11 +6,11 @@ services:
     Github\HttpClient\Builder:
         arguments:
             - '@github.httplug_client'
-            - '@Http\Message\RequestFactory'
-            - '@Http\Message\StreamFactory'
+            - '@Psr\Http\Message\ResponseFactoryInterface'
+            - '@Psr\Http\Message\StreamFactoryInterface'
 
     github.httplug_client:
-        class: Symfony\Component\HttpClient\HttplugClient
+        class: Symfony\Component\HttpClient\Psr18Client
         arguments:
             - '@http_client'
             - '@Psr\Http\Message\ResponseFactoryInterface'

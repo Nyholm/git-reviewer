@@ -9,15 +9,16 @@ use Nyholm\GitReviewer\Service\ContributorProvider;
 use Nyholm\GitReviewer\Service\GithubUsernameProvider;
 use Nyholm\GitReviewer\Service\RepositoryProvider;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'find', description: 'Find reviewer for a specific Github Pull Request')]
 class FindCommand extends Command
 {
-    protected static $defaultName = 'find';
     private $repositoryProvider;
     private $changeSetProvider;
     private $contributorProvider;
@@ -36,7 +37,6 @@ class FindCommand extends Command
 
     protected function configure()
     {
-        $this->setDescription('Find reviewer for a specific Github Pull Request');
         $this->addArgument('pull-request', InputArgument::REQUIRED, 'The pull request number');
         $this->addArgument('workspace', InputArgument::REQUIRED, 'The path to the workspace, ie where the project is cloned');
         $this->addOption('after', null, InputOption::VALUE_REQUIRED, 'Only look for contributors after a date (Y-m-d)');
@@ -45,7 +45,7 @@ class FindCommand extends Command
         $this->addOption('pretty-print', null, InputOption::VALUE_NONE, 'Human readable output');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $repository = $this->repositoryProvider->find($input->getArgument('workspace'));
 
